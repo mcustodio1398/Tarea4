@@ -1,20 +1,17 @@
 
 package Vista;
 
-/**
- *
- * @author micha
- */
+// Ventana principal que muestra el listado de usuarios registrados
 public class PrincipalFrame extends javax.swing.JFrame {
-    
+
+    // Logger para registrar errores del sistema
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrincipalFrame.class.getName());
 
-    /**
-     * Creates new form PrincipalFrame
-     */
+    // Constructor: inicializa componentes, tabla y estilos visuales
     public PrincipalFrame() {
         initComponents();
         configurarTabla();
+        aplicarEstilos(); // Aplica estilos visuales
     }
 
     /**
@@ -104,74 +101,135 @@ public class PrincipalFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+  // Aplica todos los estilos visuales a los componentes de la ventana
+    private void aplicarEstilos() {
+
+        // ─── FONDO DE LA VENTANA ──────────────────────────────────
+        // Color azul muy claro consistente con Login y Registro
+        getContentPane().setBackground(new java.awt.Color(235, 243, 255));
+
+        // ─── TÍTULO ───────────────────────────────────────────────
+        // Fuente grande en negrita con color azul corporativo
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 22));
+        lblTitulo.setForeground(new java.awt.Color(26, 82, 160));
+
+        // ─── TABLA DE USUARIOS ────────────────────────────────────
+        // Encabezado de la tabla con fondo azul y texto blanco
+        tblUsuarios.getTableHeader().setBackground(new java.awt.Color(26, 82, 160));
+        tblUsuarios.getTableHeader().setForeground(java.awt.Color.WHITE);
+        tblUsuarios.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        // Filas con fuente limpia y altura mayor para mejor legibilidad
+        tblUsuarios.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        tblUsuarios.setRowHeight(28);
+        // Color de selección de fila en azul claro
+        tblUsuarios.setSelectionBackground(new java.awt.Color(173, 214, 255));
+        tblUsuarios.setSelectionForeground(java.awt.Color.BLACK);
+        // Líneas de la cuadrícula en azul muy claro
+        tblUsuarios.setGridColor(new java.awt.Color(200, 220, 245));
+        tblUsuarios.setBackground(java.awt.Color.WHITE);
+
+        // ─── BOTÓN NUEVO ──────────────────────────────────────────
+        // Azul corporativo — acción principal para agregar usuarios
+        btnNuevo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        btnNuevo.setBackground(new java.awt.Color(26, 82, 160));
+        btnNuevo.setForeground(java.awt.Color.WHITE);
+        btnNuevo.setBorderPainted(false);
+        btnNuevo.setFocusPainted(false);
+        btnNuevo.setOpaque(true);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // ─── BOTÓN ACTUALIZAR ─────────────────────────────────────
+        // Azul medio — acción de modificación
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        btnActualizar.setBackground(new java.awt.Color(52, 120, 210));
+        btnActualizar.setForeground(java.awt.Color.WHITE);
+        btnActualizar.setBorderPainted(false);
+        btnActualizar.setFocusPainted(false);
+        btnActualizar.setOpaque(true);
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // ─── BOTÓN ELIMINAR ───────────────────────────────────────
+        // Rojo — acción de peligro/eliminación
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        btnEliminar.setBackground(new java.awt.Color(200, 50, 50));
+        btnEliminar.setForeground(java.awt.Color.WHITE);
+        btnEliminar.setBorderPainted(false);
+        btnEliminar.setFocusPainted(false);
+        btnEliminar.setOpaque(true);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // ─── BOTÓN CERRAR SESIÓN ──────────────────────────────────
+        // Gris — acción de salida/cancelar sesión
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        btnCerrarSesion.setBackground(new java.awt.Color(108, 117, 125));
+        btnCerrarSesion.setForeground(java.awt.Color.WHITE);
+        btnCerrarSesion.setBorderPainted(false);
+        btnCerrarSesion.setFocusPainted(false);
+        btnCerrarSesion.setOpaque(true);
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    }
+
     // Configura la tabla para que no sea editable directamente
-private void configurarTabla() {
-    tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-        new Object[][] {},
-        new String[]{"Nombre", "Apellido", "Teléfono", "Correo", "Usuario"}
-    ) {
-        // La tabla no es editable directamente, se edita desde el controlador
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
-    });
-    // Permite seleccionar solo una fila a la vez
-    tblUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-}
+    private void configurarTabla() {
+        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object[][]{},
+            new String[]{"Nombre", "Apellido", "Teléfono", "Correo", "Usuario"}
+        ) {
+            // La tabla no es editable directamente, se edita desde el controlador
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        // Permite seleccionar solo una fila a la vez
+        tblUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    }
 
-// Retorna el modelo de la tabla para manipularlo desde el controlador
-public javax.swing.table.DefaultTableModel getModeloTabla() {
-    return (javax.swing.table.DefaultTableModel) tblUsuarios.getModel();
-}
+    // Retorna el modelo de la tabla para manipularlo desde el controlador
+    public javax.swing.table.DefaultTableModel getModeloTabla() {
+        return (javax.swing.table.DefaultTableModel) tblUsuarios.getModel();
+    }
 
-// Retorna la tabla para leer la fila seleccionada desde el controlador
-public javax.swing.JTable getTblUsuarios() { return tblUsuarios; }
+    // Retorna la tabla para leer la fila seleccionada desde el controlador
+    public javax.swing.JTable getTblUsuarios() { return tblUsuarios; }
 
-// Retorna el índice de la fila seleccionada en la tabla
-public int getFilaSeleccionada() {
-    return tblUsuarios.getSelectedRow();
-}
+    // Retorna el índice de la fila seleccionada en la tabla
+    public int getFilaSeleccionada() {
+        return tblUsuarios.getSelectedRow();
+    }
 
-// Retorna el botón Nuevo para asignarle acción desde el controlador
-public javax.swing.JButton getBtnNuevo() { return btnNuevo; }
+    // Retorna el botón Nuevo para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnNuevo() { return btnNuevo; }
 
-// Retorna el botón Actualizar para asignarle acción desde el controlador
-public javax.swing.JButton getBtnActualizar() { return btnActualizar; }
+    // Retorna el botón Actualizar para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnActualizar() { return btnActualizar; }
 
-// Retorna el botón Eliminar para asignarle acción desde el controlador
-public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
+    // Retorna el botón Eliminar para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnEliminar() { return btnEliminar; }
 
-// Retorna el botón Cerrar Sesión para asignarle acción desde el controlador
-public javax.swing.JButton getBtnCerrarSesion() { return btnCerrarSesion; }
+    // Retorna el botón Cerrar Sesión para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnCerrarSesion() { return btnCerrarSesion; }
 
-// Muestra un mensaje de error en ventana emergente
-public void mostrarError(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error",
-        javax.swing.JOptionPane.ERROR_MESSAGE);
-}
+    // Muestra un mensaje de error en ventana emergente
+    public void mostrarError(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
 
-// Muestra un mensaje de éxito en ventana emergente
-public void mostrarExito(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE);
-}
+    // Muestra un mensaje de éxito en ventana emergente
+    public void mostrarExito(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
 
-// Muestra un diálogo de confirmación y retorna true si el usuario acepta
-public boolean confirmar(String mensaje) {
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, mensaje,
-        "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
-    return respuesta == javax.swing.JOptionPane.YES_OPTION;
-}
+    // Muestra un diálogo de confirmación y retorna true si el usuario acepta
+    public boolean confirmar(String mensaje) {
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, mensaje,
+            "Confirmar", javax.swing.JOptionPane.YES_NO_OPTION);
+        return respuesta == javax.swing.JOptionPane.YES_OPTION;
+    }
 
-    /**
-     * @param args the command line arguments
-     */
+    // Método principal para pruebas — en producción se usa MainTarea4.java
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -180,11 +238,8 @@ public boolean confirmar(String mensaje) {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new PrincipalFrame().setVisible(true));
     }
 

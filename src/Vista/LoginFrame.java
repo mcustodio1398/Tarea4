@@ -1,19 +1,17 @@
-
 package Vista;
 
-
+// Ventana de inicio de sesión del sistema
 public class LoginFrame extends javax.swing.JFrame {
-    
+
+    // Logger para registrar errores del sistema
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
 
-    /**
-     * Creates new form LoginFrame
-     */
+    // Constructor: inicializa componentes, placeholders y estilos visuales
     public LoginFrame() {
         initComponents();
         configurarPlaceholders();
+        aplicarEstilos(); // Aplica estilos visuales
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,114 +72,155 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ 
+
+    // Aplica todos los estilos visuales a los componentes de la ventana
+    private void aplicarEstilos() {
+
+        // ─── FONDO DE LA VENTANA ──────────────────────────────────
+        // Color azul muy claro para el fondo general
+        getContentPane().setBackground(new java.awt.Color(235, 243, 255));
+
+        // ─── TÍTULO ───────────────────────────────────────────────
+        // Fuente grande y en negrita con color azul corporativo
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+        lblTitulo.setForeground(new java.awt.Color(26, 82, 160));
+
+        // ─── CAMPO NOMBRE DE USUARIO ──────────────────────────────
+        // Fondo blanco con borde azul claro y padding interno
+        jTextField2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        jTextField2.setBackground(java.awt.Color.WHITE);
+        jTextField2.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+            javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 210, 240), 1),
+            javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+
+        // ─── CAMPO CONTRASEÑA ─────────────────────────────────────
+        // Mismo estilo que el campo de usuario para consistencia visual
+        txtContrasena.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        txtContrasena.setBackground(java.awt.Color.WHITE);
+        txtContrasena.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+            javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 210, 240), 1),
+            javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+
+        // ─── BOTÓN ENTRAR ─────────────────────────────────────────
+        // Azul corporativo con texto blanco — acción principal
+        btnEntrar.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        btnEntrar.setBackground(new java.awt.Color(26, 82, 160));
+        btnEntrar.setForeground(java.awt.Color.WHITE);
+        btnEntrar.setBorderPainted(false);   // Sin borde visible
+        btnEntrar.setFocusPainted(false);    // Sin contorno al enfocar
+        btnEntrar.setOpaque(true);
+        btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        // ─── BOTÓN REGISTRARSE ────────────────────────────────────
+        // Gris neutro con texto blanco — acción secundaria
+        btnRegistrarse.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        btnRegistrarse.setBackground(new java.awt.Color(108, 117, 125));
+        btnRegistrarse.setForeground(java.awt.Color.WHITE);
+        btnRegistrarse.setBorderPainted(false);
+        btnRegistrarse.setFocusPainted(false);
+        btnRegistrarse.setOpaque(true);
+        btnRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    }
 
     // Configura los placeholders de los campos
-private void configurarPlaceholders() {
+    private void configurarPlaceholders() {
 
-    // Placeholder para jTextField2 (campo de usuario)
-    jTextField2.setForeground(java.awt.Color.GRAY);
-    jTextField2.setText("Nombre de Usuario");
-    jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent e) {
-            if (jTextField2.getText().equals("Nombre de Usuario")) {
-                jTextField2.setText("");
-                jTextField2.setForeground(java.awt.Color.BLACK);
+        // Placeholder para jTextField2 (campo de usuario)
+        // Muestra texto gris de sugerencia que desaparece al hacer clic
+        jTextField2.setForeground(java.awt.Color.GRAY);
+        jTextField2.setText("Nombre de Usuario");
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                // Al hacer clic, borra el placeholder y cambia el color a negro
+                if (jTextField2.getText().equals("Nombre de Usuario")) {
+                    jTextField2.setText("");
+                    jTextField2.setForeground(java.awt.Color.BLACK);
+                }
             }
-        }
-        public void focusLost(java.awt.event.FocusEvent e) {
-            if (jTextField2.getText().isEmpty()) {
-                jTextField2.setForeground(java.awt.Color.GRAY);
-                jTextField2.setText("Nombre de Usuario");
+            public void focusLost(java.awt.event.FocusEvent e) {
+                // Si se va sin escribir, restaura el placeholder
+                if (jTextField2.getText().isEmpty()) {
+                    jTextField2.setForeground(java.awt.Color.GRAY);
+                    jTextField2.setText("Nombre de Usuario");
+                }
             }
-        }
-    });
+        });
 
-    // Placeholder para txtContrasena (campo de contraseña oculta)
-    txtContrasena.setForeground(java.awt.Color.GRAY);
-    txtContrasena.setEchoChar((char) 0);
-    txtContrasena.setText("Contraseña");
-    txtContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent e) {
-            if (String.valueOf(txtContrasena.getPassword()).equals("Contraseña")) {
-                txtContrasena.setText("");
-                txtContrasena.setForeground(java.awt.Color.BLACK);
-                txtContrasena.setEchoChar('●');
+        // Placeholder para txtContrasena (campo de contraseña oculta)
+        // Muestra texto visible como sugerencia y lo oculta al escribir
+        txtContrasena.setForeground(java.awt.Color.GRAY);
+        txtContrasena.setEchoChar((char) 0); // Muestra el texto del placeholder
+        txtContrasena.setText("Contraseña");
+        txtContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                // Al hacer clic, activa el ocultamiento y borra el placeholder
+                if (String.valueOf(txtContrasena.getPassword()).equals("Contraseña")) {
+                    txtContrasena.setText("");
+                    txtContrasena.setForeground(java.awt.Color.BLACK);
+                    txtContrasena.setEchoChar('●'); // Oculta la contraseña
+                }
             }
-        }
-        public void focusLost(java.awt.event.FocusEvent e) {
-            if (String.valueOf(txtContrasena.getPassword()).isEmpty()) {
-                txtContrasena.setForeground(java.awt.Color.GRAY);
-                txtContrasena.setEchoChar((char) 0);
-                txtContrasena.setText("Contraseña");
+            public void focusLost(java.awt.event.FocusEvent e) {
+                // Si se va sin escribir, restaura el placeholder visible
+                if (String.valueOf(txtContrasena.getPassword()).isEmpty()) {
+                    txtContrasena.setForeground(java.awt.Color.GRAY);
+                    txtContrasena.setEchoChar((char) 0);
+                    txtContrasena.setText("Contraseña");
+                }
             }
-        }
-    });
-}
+        });
+    }
 
-// Retorna el usuario ingresado, excluyendo el placeholder
-public String getUsuario() {
-    String texto = jTextField2.getText();
-    return texto.equals("Nombre de Usuario") ? "" : texto;
-}
+    // Retorna el usuario ingresado, excluyendo el placeholder
+    public String getUsuario() {
+        String texto = jTextField2.getText();
+        return texto.equals("Nombre de Usuario") ? "" : texto;
+    }
 
-// Retorna la contraseña ingresada, excluyendo el placeholder
-public String getContrasena() {
-    String pass = new String(txtContrasena.getPassword());
-    return pass.equals("Contraseña") ? "" : pass;
-}
+    // Retorna la contraseña ingresada, excluyendo el placeholder
+    public String getContrasena() {
+        String pass = new String(txtContrasena.getPassword());
+        return pass.equals("Contraseña") ? "" : pass;
+    }
 
-// Retorna el botón Entrar para asignarle acción desde el controlador
-public javax.swing.JButton getBtnEntrar() { return btnEntrar; }
+    // Retorna el botón Entrar para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnEntrar() { return btnEntrar; }
 
-// Retorna el botón Registrarse para asignarle acción desde el controlador
-public javax.swing.JButton getBtnRegistrarse() { return btnRegistrarse; }
+    // Retorna el botón Registrarse para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnRegistrarse() { return btnRegistrarse; }
 
-// Limpia ambos campos y restaura los placeholders
-public void limpiarCampos() {
-    jTextField2.setForeground(java.awt.Color.GRAY);
-    jTextField2.setText("Nombre de Usuario");
-    txtContrasena.setForeground(java.awt.Color.GRAY);
-    txtContrasena.setEchoChar((char) 0);
-    txtContrasena.setText("Contraseña");
-}
+    // Limpia ambos campos y restaura los placeholders
+    public void limpiarCampos() {
+        jTextField2.setForeground(java.awt.Color.GRAY);
+        jTextField2.setText("Nombre de Usuario");
+        txtContrasena.setForeground(java.awt.Color.GRAY);
+        txtContrasena.setEchoChar((char) 0);
+        txtContrasena.setText("Contraseña");
+    }
 
-// Muestra un mensaje de error en ventana emergente
-public void mostrarError(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error", 
-        javax.swing.JOptionPane.ERROR_MESSAGE);
-}
+    // Muestra un mensaje de error en ventana emergente
+    public void mostrarError(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
 
-// Muestra un mensaje de éxito en ventana emergente
-public void mostrarExito(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito", 
-        javax.swing.JOptionPane.INFORMATION_MESSAGE);
-}
+    // Muestra un mensaje de éxito en ventana emergente
+    public void mostrarExito(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
 
-private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
-    // Manejado por el controlador
-}
+    // Métodos de eventos — la lógica es manejada por el controlador
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {}
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {}
 
-private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {
-    // Manejado por el controlador
-}
-
-private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
-    // Manejado por el controlador
-}
-
-private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {
-    // Manejado por el controlador
-}
-
-    /**
-     * @param args the command line arguments
-     */
+    // Método principal para pruebas — en producción se usa MainTarea4.java
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -190,11 +229,8 @@ private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
     }
 

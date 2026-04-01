@@ -1,20 +1,17 @@
 
 package Vista;
 
-/**
- *
- * @author micha
- */
+// Ventana de registro de nuevos usuarios del sistema
 public class RegistroFrame extends javax.swing.JFrame {
-    
+
+    // Logger para registrar errores del sistema
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroFrame.class.getName());
 
-    /**
-     * Creates new form RegistroFrame
-     */
+    // Constructor: inicializa componentes, placeholders y estilos visuales
     public RegistroFrame() {
         initComponents();
         configurarPlaceholders();
+        aplicarEstilos(); // Aplica estilos visuales
     }
 
     /**
@@ -107,136 +104,136 @@ public class RegistroFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Configura los placeholders de todos los campos
-private void configurarPlaceholders() {
-    configurarPlaceholderTextField(txtNombre, "Nombre");
-    configurarPlaceholderTextField(txtApellido, "Apellido");
-    configurarPlaceholderTextField(txtNombreUsuario, "Nombre de Usuario");
-    configurarPlaceholderTextField(txtTelefono, "Teléfono");
-    configurarPlaceholderTextField(txtCorreo, "Correo Electrónico");
-    configurarPlaceholderPassword(txtContrasena, "Contraseña");
-    configurarPlaceholderPassword(txtConfirmarContrasena, "Confirmar Contraseña");
-}
+  // Configura los placeholders de todos los campos
+    private void configurarPlaceholders() {
+        // Aplica placeholder a cada campo de texto y contraseña
+        configurarPlaceholderTextField(txtNombre, "Nombre");
+        configurarPlaceholderTextField(txtApellido, "Apellido");
+        configurarPlaceholderTextField(txtNombreUsuario, "Nombre de Usuario");
+        configurarPlaceholderTextField(txtTelefono, "Teléfono");
+        configurarPlaceholderTextField(txtCorreo, "Correo Electrónico");
+        configurarPlaceholderPassword(txtContrasena, "Contraseña");
+        configurarPlaceholderPassword(txtConfirmarContrasena, "Confirmar Contraseña");
+    }
 
-// Método reutilizable para placeholder en JTextField
-private void configurarPlaceholderTextField(javax.swing.JTextField campo, String placeholder) {
-    campo.setForeground(java.awt.Color.GRAY);
-    campo.setText(placeholder);
-    campo.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent e) {
-            if (campo.getText().equals(placeholder)) {
-                campo.setText("");
-                campo.setForeground(java.awt.Color.BLACK);
+    // Método reutilizable para placeholder en JTextField
+    // Muestra texto gris de sugerencia que desaparece al hacer clic
+    private void configurarPlaceholderTextField(javax.swing.JTextField campo, String placeholder) {
+        campo.setForeground(java.awt.Color.GRAY);
+        campo.setText(placeholder);
+        campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                // Al hacer clic, borra el placeholder y cambia el color a negro
+                if (campo.getText().equals(placeholder)) {
+                    campo.setText("");
+                    campo.setForeground(java.awt.Color.BLACK);
+                }
             }
-        }
-        public void focusLost(java.awt.event.FocusEvent e) {
-            if (campo.getText().isEmpty()) {
-                campo.setForeground(java.awt.Color.GRAY);
-                campo.setText(placeholder);
+            public void focusLost(java.awt.event.FocusEvent e) {
+                // Si se va sin escribir, restaura el placeholder
+                if (campo.getText().isEmpty()) {
+                    campo.setForeground(java.awt.Color.GRAY);
+                    campo.setText(placeholder);
+                }
             }
-        }
-    });
-}
+        });
+    }
 
-// Método reutilizable para placeholder en JPasswordField
-private void configurarPlaceholderPassword(javax.swing.JPasswordField campo, String placeholder) {
-    campo.setForeground(java.awt.Color.GRAY);
-    campo.setEchoChar((char) 0);
-    campo.setText(placeholder);
-    campo.addFocusListener(new java.awt.event.FocusAdapter() {
-        public void focusGained(java.awt.event.FocusEvent e) {
-            if (String.valueOf(campo.getPassword()).equals(placeholder)) {
-                campo.setText("");
-                campo.setForeground(java.awt.Color.BLACK);
-                campo.setEchoChar('●');
+    // Método reutilizable para placeholder en JPasswordField
+    // Muestra texto visible como sugerencia y lo oculta al escribir
+    private void configurarPlaceholderPassword(javax.swing.JPasswordField campo, String placeholder) {
+        campo.setForeground(java.awt.Color.GRAY);
+        campo.setEchoChar((char) 0); // Muestra el texto del placeholder
+        campo.setText(placeholder);
+        campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                // Al hacer clic, activa el ocultamiento y borra el placeholder
+                if (String.valueOf(campo.getPassword()).equals(placeholder)) {
+                    campo.setText("");
+                    campo.setForeground(java.awt.Color.BLACK);
+                    campo.setEchoChar('●'); // Oculta la contraseña
+                }
             }
-        }
-        public void focusLost(java.awt.event.FocusEvent e) {
-            if (String.valueOf(campo.getPassword()).isEmpty()) {
-                campo.setForeground(java.awt.Color.GRAY);
-                campo.setEchoChar((char) 0);
-                campo.setText(placeholder);
+            public void focusLost(java.awt.event.FocusEvent e) {
+                // Si se va sin escribir, restaura el placeholder visible
+                if (String.valueOf(campo.getPassword()).isEmpty()) {
+                    campo.setForeground(java.awt.Color.GRAY);
+                    campo.setEchoChar((char) 0);
+                    campo.setText(placeholder);
+                }
             }
-        }
-    });
-}
+        });
+    }
 
-// ─── GETTERS PARA EL CONTROLADOR ──────────────────────────────
+    // ─── GETTERS PARA EL CONTROLADOR ──────────────────────────────
 
-// Retorna el nombre ingresado, excluyendo el placeholder
-public String getNombre() {
-    String t = txtNombre.getText();
-    return t.equals("Nombre") ? "" : t;
-}
+    // Retorna el nombre ingresado, excluyendo el placeholder
+    public String getNombre() {
+        String t = txtNombre.getText();
+        return t.equals("Nombre") ? "" : t;
+    }
 
-// Retorna el apellido ingresado, excluyendo el placeholder
-public String getApellido() {
-    String t = txtApellido.getText();
-    return t.equals("Apellido") ? "" : t;
-}
+    // Retorna el apellido ingresado, excluyendo el placeholder
+    public String getApellido() {
+        String t = txtApellido.getText();
+        return t.equals("Apellido") ? "" : t;
+    }
 
-// Retorna el nombre de usuario ingresado, excluyendo el placeholder
-public String getNombreUsuario() {
-    String t = txtNombreUsuario.getText();
-    return t.equals("Nombre de Usuario") ? "" : t;
-}
+    // Retorna el nombre de usuario ingresado, excluyendo el placeholder
+    public String getNombreUsuario() {
+        String t = txtNombreUsuario.getText();
+        return t.equals("Nombre de Usuario") ? "" : t;
+    }
 
-// Retorna el teléfono ingresado, excluyendo el placeholder
-public String getTelefono() {
-    String t = txtTelefono.getText();
-    return t.equals("Teléfono") ? "" : t;
-}
+    // Retorna el teléfono ingresado, excluyendo el placeholder
+    public String getTelefono() {
+        String t = txtTelefono.getText();
+        return t.equals("Teléfono") ? "" : t;
+    }
 
-// Retorna el correo ingresado, excluyendo el placeholder
-public String getCorreo() {
-    String t = txtCorreo.getText();
-    return t.equals("Correo Electrónico") ? "" : t;
-}
+    // Retorna el correo ingresado, excluyendo el placeholder
+    public String getCorreo() {
+        String t = txtCorreo.getText();
+        return t.equals("Correo Electrónico") ? "" : t;
+    }
 
-// Retorna la contraseña ingresada, excluyendo el placeholder
-public String getContrasena() {
-    String p = new String(txtContrasena.getPassword());
-    return p.equals("Contraseña") ? "" : p;
-}
+    // Retorna la contraseña ingresada, excluyendo el placeholder
+    public String getContrasena() {
+        String p = new String(txtContrasena.getPassword());
+        return p.equals("Contraseña") ? "" : p;
+    }
 
-// Retorna la confirmación de contraseña, excluyendo el placeholder
-public String getConfirmarContrasena() {
-    String p = new String(txtConfirmarContrasena.getPassword());
-    return p.equals("Confirmar Contraseña") ? "" : p;
-}
+    // Retorna la confirmación de contraseña, excluyendo el placeholder
+    public String getConfirmarContrasena() {
+        String p = new String(txtConfirmarContrasena.getPassword());
+        return p.equals("Confirmar Contraseña") ? "" : p;
+    }
 
-// Retorna el botón Registrar para asignarle acción desde el controlador
-public javax.swing.JButton getBtnRegistrar() { return btnRegistrar; }
+    // Retorna el botón Registrar para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnRegistrar() { return btnRegistrar; }
 
-// Retorna el botón Volver para asignarle acción desde el controlador
-public javax.swing.JButton getBtnVolver() { return btnVolver; }
+    // Retorna el botón Volver para asignarle acción desde el controlador
+    public javax.swing.JButton getBtnVolver() { return btnVolver; }
 
-// Limpia todos los campos y restaura los placeholders
-public void limpiarCampos() {
-    configurarPlaceholders();
-}
+    // Limpia todos los campos restaurando los placeholders
+    public void limpiarCampos() {
+        configurarPlaceholders();
+    }
 
-// Muestra un mensaje de error en ventana emergente
-public void mostrarError(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error",
-        javax.swing.JOptionPane.ERROR_MESSAGE);
-}
+    // Muestra un mensaje de error en ventana emergente
+    public void mostrarError(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
 
-// Muestra un mensaje de éxito en ventana emergente
-public void mostrarExito(String mensaje) {
-    javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE);
-}
+    // Muestra un mensaje de éxito en ventana emergente
+    public void mostrarExito(String mensaje) {
+        javax.swing.JOptionPane.showMessageDialog(this, mensaje, "Éxito",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
 
-    /**
-     * @param args the command line arguments
-     */
+    // Método principal para pruebas — en producción se usa MainTarea4.java
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -245,13 +242,83 @@ public void mostrarExito(String mensaje) {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new RegistroFrame().setVisible(true));
     }
+    
+    
+    // Aplica todos los estilos visuales a los componentes de la ventana
+private void aplicarEstilos() {
+
+    // ─── FONDO DE LA VENTANA ──────────────────────────────────
+    // Color azul muy claro consistente con el Login
+    getContentPane().setBackground(new java.awt.Color(235, 243, 255));
+
+    // ─── TÍTULO ───────────────────────────────────────────────
+    // Fuente grande en negrita con color azul corporativo
+    lblTitulo.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+    lblTitulo.setForeground(new java.awt.Color(26, 82, 160));
+
+    // ─── ESTILO GENERAL DE CAMPOS DE TEXTO ───────────────────
+    // Fondo blanco con borde azul claro y padding interno
+    javax.swing.border.Border bordeCampo = javax.swing.BorderFactory.createCompoundBorder(
+        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 210, 240), 1),
+        javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10)
+    );
+    java.awt.Font fuenteCampo = new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13);
+
+    // Aplica el estilo a cada campo de texto
+    txtNombre.setFont(fuenteCampo);
+    txtNombre.setBackground(java.awt.Color.WHITE);
+    txtNombre.setBorder(bordeCampo);
+
+    txtApellido.setFont(fuenteCampo);
+    txtApellido.setBackground(java.awt.Color.WHITE);
+    txtApellido.setBorder(bordeCampo);
+
+    txtNombreUsuario.setFont(fuenteCampo);
+    txtNombreUsuario.setBackground(java.awt.Color.WHITE);
+    txtNombreUsuario.setBorder(bordeCampo);
+
+    txtTelefono.setFont(fuenteCampo);
+    txtTelefono.setBackground(java.awt.Color.WHITE);
+    txtTelefono.setBorder(bordeCampo);
+
+    txtCorreo.setFont(fuenteCampo);
+    txtCorreo.setBackground(java.awt.Color.WHITE);
+    txtCorreo.setBorder(bordeCampo);
+
+    // ─── ESTILO DE CAMPOS DE CONTRASEÑA ───────────────────────
+    // Mismo estilo que los campos de texto para consistencia visual
+    txtContrasena.setFont(fuenteCampo);
+    txtContrasena.setBackground(java.awt.Color.WHITE);
+    txtContrasena.setBorder(bordeCampo);
+
+    txtConfirmarContrasena.setFont(fuenteCampo);
+    txtConfirmarContrasena.setBackground(java.awt.Color.WHITE);
+    txtConfirmarContrasena.setBorder(bordeCampo);
+
+    // ─── BOTÓN REGISTRAR ──────────────────────────────────────
+    // Verde para indicar acción de confirmación/éxito
+    btnRegistrar.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+    btnRegistrar.setBackground(new java.awt.Color(39, 148, 95));
+    btnRegistrar.setForeground(java.awt.Color.WHITE);
+    btnRegistrar.setBorderPainted(false);
+    btnRegistrar.setFocusPainted(false);
+    btnRegistrar.setOpaque(true);
+    btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+    // ─── BOTÓN VOLVER ─────────────────────────────────────────
+    // Gris neutro para indicar acción secundaria/cancelar
+    btnVolver.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+    btnVolver.setBackground(new java.awt.Color(108, 117, 125));
+    btnVolver.setForeground(java.awt.Color.WHITE);
+    btnVolver.setBorderPainted(false);
+    btnVolver.setFocusPainted(false);
+    btnVolver.setOpaque(true);
+    btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;

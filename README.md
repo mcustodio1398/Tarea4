@@ -1,4 +1,4 @@
-# 📋 Tarea 4 — Sistema de Login y Gestión de Usuarios
+#  Tarea 4 — Sistema de Login y Gestión de Usuarios
 
 ![Java](https://img.shields.io/badge/Java-JDK%2017+-orange?style=flat-square)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-blue?style=flat-square)
@@ -9,21 +9,21 @@ Sistema de gestión de usuarios con interfaz gráfica desarrollado en Java con S
 
 ---
 
-## 📌 Descripción
+##  Descripción
 
 Este sistema permite a los usuarios registrarse e iniciar sesión de forma segura. Una vez dentro, se muestra un listado completo de todos los usuarios registrados con opciones para agregar, actualizar y eliminar registros en tiempo real.
 
 ---
 
-## ✅ Funcionalidades
+##  Funcionalidades
 
-### 🔐 Login
+###  Login
 - Inicio de sesión con nombre de usuario y contraseña
 - La contraseña se oculta automáticamente al escribir
 - Validación de campos vacíos con mensaje de error descriptivo
 - Acceso directo a la pantalla de registro desde el login
 
-### 📝 Registro
+###  Registro
 - Formulario completo con los siguientes campos obligatorios:
   - Nombre
   - Apellido
@@ -36,7 +36,7 @@ Este sistema permite a los usuarios registrarse e iniciar sesión de forma segur
 - Verificación de que la contraseña y su confirmación coincidan
 - Contraseñas ocultas con efecto placeholder visible
 
-### 👥 Pantalla Principal
+###  Pantalla Principal
 - Listado de todos los usuarios registrados en una tabla
 - Columnas: Nombre, Apellido, Teléfono, Correo Electrónico, Usuario
 - Botón **Nuevo** para agregar un nuevo usuario
@@ -47,7 +47,7 @@ Este sistema permite a los usuarios registrarse e iniciar sesión de forma segur
 
 ---
 
-## 🏗️ Arquitectura MVC
+##  Arquitectura MVC
 
 El proyecto sigue el patrón de diseño **Modelo - Vista - Controlador**:
 
@@ -74,7 +74,7 @@ src/
 
 ---
 
-## 🧠 Pilares de la Programación Orientada a Objetos
+##  Pilares de la Programación Orientada a Objetos
 
 | Pilar | Clase | Descripción |
 |-------|-------|-------------|
@@ -85,7 +85,7 @@ src/
 
 ---
 
-## 🎨 Patrones de Diseño
+##  Patrones de Diseño
 
 ### Singleton — `Conexion.java`
 Garantiza que solo exista **una única instancia** de la conexión a la base de datos durante toda la ejecución del programa.
@@ -107,7 +107,7 @@ Separación clara de responsabilidades:
 
 ---
 
-## 🗄️ Base de Datos
+##  Base de Datos
 
 ### Configuración
 La conexión se configura en el archivo `config.properties` ubicado en `src/`:
@@ -139,7 +139,7 @@ CREATE TABLE Usuario (
 
 ---
 
-## ⚙️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 | Tecnología | Versión | Uso |
 |------------|---------|-----|
@@ -151,7 +151,7 @@ CREATE TABLE Usuario (
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+##  Cómo Ejecutar el Proyecto
 
 ### Requisitos previos
 - JDK 17 o superior instalado
@@ -195,7 +195,7 @@ db.password=tu_contraseña
 
 ---
 
-## 📁 Archivos importantes
+##  Archivos importantes
 
 | Archivo | Descripción |
 |---------|-------------|
@@ -205,7 +205,7 @@ db.password=tu_contraseña
 
 ---
 
-## 👤 Autor
+##  Autor
 
 **Michael Custodio**  
 Curso: Programación I  
@@ -213,6 +213,6 @@ Fecha: 2026
 
 ---
 
-## 📄 Licencia
+##  Licencia
 
 Este proyecto es de uso académico.
